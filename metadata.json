@@ -1,0 +1,6 @@
+{
+  "name": "Udyam Saarthi — Rural Business & Scheme Companion",
+  "description": "Samjho. Seekho. Aage Badho. A rural business knowledge, government scheme navigator, and digital enablement companion for entrepreneurs in Maharashtra.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

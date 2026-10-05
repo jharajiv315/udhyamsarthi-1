@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-canvas: #FAF8F5;
+    --bg-surface: #FFFFFF;
+    --bg-subtle: #F3EFEA;
+    --ink-primary: #0F172A;
+    --ink-secondary: #334155;
+    --ink-muted: #64748B;
+    --accent-saffron: #C25E00;
+    --accent-terracotta: #9A3412;
+    --accent-indigo: #1E3A8A;
+    --border-hairline: #E2E8F0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-canvas);
+    color: var(--ink-primary);
+    line-height: 1.6;
+  }
+
+  h1, h2, .font-display {
+    font-family: 'Fraunces', 'Noto Sans Devanagari', Georgia, serif;
+    text-wrap: balance;
+  }
+
+  .font-mono-tabular {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Subtle topographic/grid paper texture for the Modern Seva Desk header/map surfaces */
+.seva-grid-surface {
+  background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px);
+  background-size: 20px 20px;
+}
+
