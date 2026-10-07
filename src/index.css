@@ -21,8 +21,8 @@
     line-height: 1.6;
   }
 
-  h1, h2, .font-display {
-    font-family: 'Fraunces', 'Noto Sans Devanagari', Georgia, serif;
+  h1, h2, h3, .font-serif, .font-display {
+    font-family: 'Newsreader', 'Noto Sans Devanagari', Georgia, serif;
     text-wrap: balance;
   }
 

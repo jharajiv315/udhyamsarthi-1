@@ -76,14 +76,18 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-amber-50/70 via-stone-50 to-stone-100/40 border-b border-stone-200 pt-10 pb-16 px-4">
         <div className="max-w-6xl mx-auto">
-          {/* Top Tagline */}
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-amber-100 text-amber-900 border border-amber-300 text-xs font-mono font-medium">
-              <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-              <span>{t({ en: 'Maharashtra Grassroots Enterprise Companion', mr: 'महाराष्ट्र ग्रामीण उद्योजक सहाय्यक', hi: 'महाराष्ट्र ग्रामीण उद्यमी साथी' }, language)}</span>
+          {/* Top Editorial Kicker */}
+          <div className="flex flex-wrap items-center gap-2 mb-4 text-xs text-stone-600 font-sans">
+            <span className="text-stone-900 font-semibold tracking-wide uppercase text-[11px]">
+              {t({ en: 'Maharashtra Grassroots Enterprise Companion', mr: 'महाराष्ट्र ग्रामीण उद्योजक सहाय्यक', hi: 'महाराष्ट्र ग्रामीण उद्यमी साथी' }, language)}
             </span>
-            <span className="text-xs font-mono text-stone-500">
-              {t({ en: '100% Free • Verified Portals • Zero Middlemen', mr: '१००% मोफत • अधिकृत माहिती • थेट लाभ', hi: '100% मुफ्त • अधिकृत जानकारी • सीधा लाभ' }, language)}
+            <span aria-hidden="true" className="text-stone-300">·</span>
+            <span>
+              {t({ en: '100% Free Public Initiative', mr: '१००% मोफत नागरी उपक्रम', hi: '100% निःशुल्क नागरिक पहल' }, language)}
+            </span>
+            <span aria-hidden="true" className="text-stone-300">·</span>
+            <span>
+              {t({ en: 'Verified Portals & Direct Benefits', mr: 'अधिकृत माहिती व थेट लाभ', hi: 'सत्यापित पोर्टल व प्रत्यक्ष लाभ' }, language)}
             </span>
           </div>
 
@@ -152,7 +156,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                       {t({ en: 'Interactive Guidance Desk', mr: 'उद्योग मार्गदर्शन डेस्क', hi: 'उद्यम मार्गदर्शन डेस्क' }, language)}
                     </span>
                   </div>
-                  <span className="px-2 py-0.5 bg-emerald-100 text-emerald-900 text-xs font-mono font-semibold rounded">
+                  <span className="px-2 py-0.5 bg-emerald-100 text-emerald-900 text-xs font-semibold rounded">
                     {displaySchemes.length} {t({ en: 'Schemes Found', mr: 'योजना उपलब्ध', hi: 'योजनाएं उपलब्ध' }, language)}
                   </span>
                 </div>
@@ -160,7 +164,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <div className="space-y-4">
                   {/* Category Picker */}
                   <div>
-                    <label className="block text-xs font-mono font-semibold uppercase text-stone-600 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       {t({ en: '1. What business are you running or planning?', mr: '१. तुमचा व्यवसाय कोणता आहे?', hi: '1. आपका व्यवसाय कौन सा है?' }, language)}
                     </label>
                     <select
@@ -178,7 +182,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
                   {/* District Picker */}
                   <div>
-                    <label className="block text-xs font-mono font-semibold uppercase text-stone-600 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       {t({ en: '2. Your District in Maharashtra', mr: '२. तुमचा जिल्हा निवडा', hi: '2. अपना जिला चुनें' }, language)}
                     </label>
                     <select
@@ -196,7 +200,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
                   {/* Need Picker */}
                   <div>
-                    <label className="block text-xs font-mono font-semibold uppercase text-stone-600 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       {t({ en: '3. What help do you need most?', mr: '३. तुम्हाला मुख्यत्वे काय मदत हवी आहे?', hi: '3. आपको मुख्य रूप से क्या मदद चाहिए?' }, language)}
                     </label>
                     <select
@@ -215,7 +219,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   {/* Top Matching Scheme Preview */}
                   {displaySchemes.length > 0 && (
                     <div className="p-3.5 bg-amber-50/80 border border-amber-200 rounded-xl mt-3">
-                      <div className="text-xs font-mono font-semibold text-amber-900 uppercase tracking-wider mb-1">
+                      <div className="text-xs font-semibold text-amber-900 uppercase tracking-wider mb-1">
                         {t({ en: 'Top Match for You:', mr: 'तुमच्यासाठी प्रमुख योजना:', hi: 'आपके लिए प्रमुख योजना:' }, language)}
                       </div>
                       <div className="font-serif font-bold text-stone-900 text-sm">
@@ -251,14 +255,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <section className="max-w-6xl mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div>
-            <div className="text-xs font-mono font-semibold uppercase text-amber-700 mb-1">
+            <div className="text-xs font-semibold uppercase text-amber-800 tracking-wider mb-1">
               {t({ en: 'Real Maharashtra Case Studies & Personas', mr: 'महाराष्ट्रातील उद्योजकांच्या यशोगाथा व मार्ग', hi: 'महाराष्ट्र के उद्यमियों की वास्तविक केस स्टडी' }, language)}
             </div>
             <h2 className="font-serif text-2xl md:text-3xl font-bold text-stone-900">
               {t({ en: 'Learn How Fellow Entrepreneurs Succeeded', mr: 'इतर स्थानिक उद्योजकांनी कसे यश मिळवले ते पहा', hi: 'देखें अन्य स्थानीय उद्यमियों ने कैसे सफलता पाई' }, language)}
             </h2>
           </div>
-          <div className="text-xs text-stone-500 font-mono">
+          <div className="text-xs text-stone-500 font-sans">
             {t({ en: 'Click any profile to load personalized dashboard & checklist', mr: 'वैयक्तिक डॅशबोर्ड व कागदपत्रांसाठी प्रोफाइल निवडा', hi: 'व्यक्तिगत डैशबोर्ड देखने के लिए प्रोफाइल चुनें' }, language)}
           </div>
         </div>
@@ -275,10 +279,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-mono font-semibold px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200 rounded">
+                  <span className="text-xs font-semibold px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200 rounded">
                     {profile.district}
                   </span>
-                  <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-mono">
+                  <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
                     {profile.stage}
                   </span>
                 </div>
@@ -286,7 +290,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <h3 className="font-serif font-bold text-stone-900 text-lg group-hover:text-amber-700 transition-colors">
                   {profile.name}
                 </h3>
-                <div className="text-xs font-medium text-stone-600 mb-2 font-mono">
+                <div className="text-xs font-medium text-stone-600 mb-2 font-sans">
                   {profile.businessName}
                 </div>
                 <div className="text-xs text-stone-500 mb-3">
@@ -314,7 +318,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <section className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <div className="text-xs font-mono font-semibold uppercase text-amber-700 mb-1">
+            <div className="text-xs font-semibold uppercase text-amber-800 tracking-wider mb-1">
               {t({ en: 'Verified Financial Support Schemes', mr: 'शासकीय अर्थसहाय्य योजना', hi: 'सत्यापित वित्तीय सहायता योजनाएं' }, language)}
             </div>
             <h2 className="font-serif text-2xl md:text-3xl font-bold text-stone-900">
@@ -338,7 +342,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-3">
-                  <span className="px-2.5 py-0.5 bg-stone-100 text-stone-700 text-xs font-mono font-semibold rounded">
+                  <span className="px-2.5 py-0.5 bg-stone-100 text-stone-700 text-xs font-semibold rounded">
                     {t(scheme.authority, language)}
                   </span>
                   <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
@@ -361,7 +365,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   <div className="text-stone-700">{t(scheme.benefitSummary, language)}</div>
                 </div>
 
-                <div className="text-xs text-stone-500 font-mono space-y-1 mb-4">
+                <div className="text-xs text-stone-500 font-sans space-y-1 mb-4">
                   <div>• Max Subsidy: {scheme.maxSubsidy}</div>
                   <div>• Docs required: {scheme.documentsRequired.length} verified documents</div>
                 </div>
@@ -388,7 +392,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <section className="max-w-6xl mx-auto px-4">
         <div className="bg-gradient-to-r from-stone-900 via-stone-800 to-amber-950 text-white rounded-2xl p-8 md:p-10 shadow-lg relative overflow-hidden">
           <div className="relative z-10 max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded text-xs font-mono font-medium mb-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded text-xs font-sans font-medium mb-4">
               <BookOpen className="w-3.5 h-3.5 text-amber-400" />
               <span>{t({ en: 'Rural Digital Business School', mr: 'ग्रामीण डिजिटल व्यवसाय शाळा', hi: 'ग्रामीण डिजिटल व्यापार स्कूल' }, language)}</span>
             </span>

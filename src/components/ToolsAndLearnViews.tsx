@@ -8,6 +8,7 @@ import {
   Bookmark,
   BookOpen,
   Lightbulb,
+  Check,
 } from 'lucide-react';
 
 const TOOL_CATEGORIES: { id: ToolCategory | 'All'; label: { en: string; mr: string; hi: string } }[] = [
@@ -501,7 +502,7 @@ export const LearnSchoolView: React.FC<LearnSchoolViewProps> = ({
                         }`}
                         title="Mark step completed"
                       >
-                        {isStepDone ? '✓' : st.stepNumber}
+                        {isStepDone ? <Check className="w-4 h-4 mx-auto" /> : st.stepNumber}
                       </button>
 
                       <div className="space-y-2">
@@ -527,23 +528,26 @@ export const LearnSchoolView: React.FC<LearnSchoolViewProps> = ({
                     <button
                       type="button"
                       onClick={() => onToggleLessonStep(activeLesson.id, st.stepNumber)}
-                      className={`px-3 py-1.5 rounded text-xs font-semibold whitespace-nowrap shrink-0 cursor-pointer ${
+                      className={`px-3 py-1.5 rounded text-xs font-semibold whitespace-nowrap shrink-0 cursor-pointer flex items-center gap-1 ${
                         isStepDone
                           ? 'bg-emerald-100 text-emerald-900'
                           : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                       }`}
                     >
-                      {isStepDone
-                        ? lang === 'mr'
-                          ? '✓ पूर्ण झाले'
+                      {isStepDone && <Check className="w-3.5 h-3.5" />}
+                      <span>
+                        {isStepDone
+                          ? lang === 'mr'
+                            ? 'पूर्ण झाले'
+                            : lang === 'hi'
+                            ? 'पूर्ण हुआ'
+                            : 'Completed'
+                          : lang === 'mr'
+                          ? 'पूर्ण करा'
                           : lang === 'hi'
-                          ? '✓ पूर्ण हुआ'
-                          : '✓ Completed'
-                        : lang === 'mr'
-                        ? 'पूर्ण करा'
-                        : lang === 'hi'
-                        ? 'पूर्ण करें'
-                        : 'Mark Done'}
+                          ? 'पूर्ण करें'
+                          : 'Mark Done'}
+                      </span>
                     </button>
                   </div>
                 </div>

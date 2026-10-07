@@ -296,7 +296,7 @@ export const ReadinessCheckView: React.FC<ReadinessCheckViewProps> = ({
               <ul className="space-y-1.5">
                 {doingWell.map((item) => (
                   <li key={item.id} className="text-xs sm:text-sm text-slate-800 flex items-start gap-2">
-                    <span className="text-emerald-700 font-bold">✓</span>
+                    <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
                     <span>{t(item.strengthLabel, lang)}</span>
                   </li>
                 ))}
@@ -315,7 +315,7 @@ export const ReadinessCheckView: React.FC<ReadinessCheckViewProps> = ({
             <ul className="space-y-2">
               {recommendedNext.slice(0, 3).map((item) => (
                 <li key={item.id} className="text-xs sm:text-sm text-slate-800 flex items-start gap-2">
-                  <span className="text-[#C25E00] font-bold">→</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#C25E00] shrink-0 mt-0.5" />
                   <button
                     type="button"
                     onClick={() => onOpenTool(item.linkedToolId)}

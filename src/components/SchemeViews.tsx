@@ -482,10 +482,10 @@ export const SchemeViews: React.FC<SchemeFinderProps> = ({
                   <span className="text-xs font-mono-tabular text-slate-500">
                     {isChecked
                       ? lang === 'mr'
-                        ? '✓ तयार'
+                        ? 'तयार'
                         : lang === 'hi'
-                        ? '✓ तैयार'
-                        : '✓ Ready'
+                        ? 'तैयार'
+                        : 'Ready'
                       : lang === 'mr'
                       ? 'बाकी'
                       : lang === 'hi'
@@ -849,15 +849,15 @@ export const SchemeViews: React.FC<SchemeFinderProps> = ({
                       <span className="font-semibold text-emerald-800">
                         {isHighMatch
                           ? lang === 'mr'
-                            ? '✓ अत्यंत सुसंगत (Likely Eligible — Strong Match)'
+                            ? 'अत्यंत सुसंगत (Likely Eligible — Strong Match)'
                             : lang === 'hi'
-                            ? '✓ अत्यधिक उपयुक्त (Likely Eligible — Strong Match)'
-                            : '✓ Likely Eligible — Strong Match'
+                            ? 'अत्यधिक उपयुक्त (Likely Eligible — Strong Match)'
+                            : 'Likely Eligible — Strong Match'
                           : lang === 'mr'
-                          ? '✓ संबंधित पर्याय (Relevant Option)'
+                          ? 'संबंधित पर्याय (Relevant Option)'
                           : lang === 'hi'
-                          ? '✓ संबंधित विकल्प (Relevant Option)'
-                          : '✓ Relevant Support Program'}
+                          ? 'संबंधित विकल्प (Relevant Option)'
+                          : 'Relevant Support Program'}
                       </span>
                       <span aria-hidden="true">·</span>
                       <span>{scheme.code}</span>
