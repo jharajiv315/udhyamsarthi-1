@@ -206,7 +206,7 @@ export const DigitalToolsView: React.FC<DigitalToolsViewProps> = ({
           <button
             type="button"
             onClick={() => onStartLesson(activeTool.relatedLessonId)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#C25E00] hover:bg-[#9A3412] rounded-md transition-colors whitespace-nowrap cursor-pointer"
+            className="inline-flex items-center gap-2 h-11 px-5 text-xs sm:text-sm font-semibold text-white bg-[#C25E00] hover:bg-[#9A3412] active:bg-[#7C2D12] rounded-md border border-[#B45309] shadow-xs transition-colors whitespace-nowrap cursor-pointer"
           >
             <BookOpen className="w-4 h-4" />
             <span>

@@ -424,7 +424,7 @@ export const AskSaarthiModal: React.FC<AskSaarthiModalProps> = ({
                   onNavigateTab('schemes');
                 }
               }}
-              className="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-[#0F172A] hover:bg-slate-800 rounded-md transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 h-10 px-5 text-xs sm:text-sm font-semibold text-white bg-[#0F172A] hover:bg-slate-800 active:bg-black rounded-md border border-slate-900 shadow-xs transition-colors cursor-pointer"
             >
               <span>{selectedScenario.actionLabel[lang]}</span>
               <ArrowRight className="w-4 h-4" />

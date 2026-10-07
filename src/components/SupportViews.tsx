@@ -17,7 +17,7 @@ import {
   ArrowRight,
   Shield,
   Heart,
-  Sparkles,
+  Mic,
 } from 'lucide-react';
 
 interface DirectoryViewProps {
@@ -589,9 +589,9 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
             <button
               onClick={onOpenVoice}
-              className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-xs rounded-lg transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 h-9 px-3.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-stone-950 font-semibold text-xs rounded-md shadow-xs transition-colors cursor-pointer"
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Mic className="w-3.5 h-3.5" />
               <span>{t({ en: 'Ask Saarthi Voice', mr: 'सारथी व्हॉइस सहाय्यक', hi: 'सारथी वॉइस साथी' }, language)}</span>
             </button>
           </div>

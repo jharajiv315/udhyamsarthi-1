@@ -128,7 +128,7 @@ export const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
           <button
             type="button"
             onClick={onOpenVoice}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold text-white bg-[#C25E00] hover:bg-[#9A3412] rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white bg-[#C25E00] hover:bg-[#9A3412] active:bg-[#7C2D12] rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer border border-[#B45309] shadow-xs"
           >
             <Mic className="w-3.5 h-3.5" />
             <span>{t(UI_LABELS.askSaarthi, lang)}</span>

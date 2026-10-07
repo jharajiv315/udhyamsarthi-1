@@ -586,16 +586,16 @@ export const SchemeViews: React.FC<SchemeFinderProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-md border border-slate-200">
             {[1, 2, 3, 4].map((s) => (
               <button
                 key={s}
                 type="button"
                 onClick={() => setStep(s as 1 | 2 | 3 | 4)}
-                className={`px-3 py-1.5 rounded text-xs font-semibold font-mono-tabular transition-colors cursor-pointer ${
+                className={`px-3 py-1 rounded text-xs font-semibold transition-colors cursor-pointer ${
                   step === s
-                    ? 'bg-[#0F172A] text-white'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    ? 'bg-[#0F172A] text-white shadow-xs'
+                    : 'text-slate-700 hover:text-slate-900 hover:bg-white/60'
                 }`}
               >
                 {lang === 'mr' ? `टप्पा ${s}` : lang === 'hi' ? `चरण ${s}` : `Step ${s}`}
@@ -931,7 +931,7 @@ export const SchemeViews: React.FC<SchemeFinderProps> = ({
                     <button
                       type="button"
                       onClick={() => setSelectedSchemeId(scheme.id)}
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#0F172A] hover:bg-slate-800 rounded-md transition-colors whitespace-nowrap cursor-pointer"
+                      className="inline-flex items-center justify-center gap-2 h-10 px-5 text-xs sm:text-sm font-semibold text-white bg-[#0F172A] hover:bg-slate-800 active:bg-black rounded-md border border-slate-900 shadow-xs transition-colors whitespace-nowrap cursor-pointer"
                     >
                       <span>
                         {lang === 'mr'
@@ -946,10 +946,10 @@ export const SchemeViews: React.FC<SchemeFinderProps> = ({
                     <button
                       type="button"
                       onClick={() => onToggleSaveScheme(scheme.id)}
-                      className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded border transition-colors whitespace-nowrap cursor-pointer ${
+                      className={`inline-flex items-center justify-center gap-1.5 h-8 px-3 text-xs font-semibold rounded-md border transition-colors whitespace-nowrap cursor-pointer shadow-xs ${
                         isSaved
                           ? 'bg-amber-50 border-[#C25E00] text-[#9A3412]'
-                          : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900'
+                          : 'bg-white border-slate-300 text-slate-700 hover:text-slate-900 hover:bg-slate-50'
                       }`}
                     >
                       <Bookmark className="w-3.5 h-3.5" />

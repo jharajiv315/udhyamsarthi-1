@@ -728,7 +728,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               type="button"
               onClick={handleDownloadPDF}
               disabled={isGeneratingPdf}
-              className="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-[#0F172A] hover:bg-slate-800 rounded-md transition-colors cursor-pointer shadow-xs disabled:opacity-50"
+              className="inline-flex items-center gap-2 h-10 px-5 text-xs sm:text-sm font-semibold text-white bg-[#0F172A] hover:bg-slate-800 active:bg-black rounded-md border border-slate-900 transition-colors cursor-pointer shadow-xs disabled:opacity-50"
             >
               <Download className="w-4 h-4 text-amber-400" />
               <span>
@@ -746,7 +746,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <button
               type="button"
               onClick={() => setShowPrintModal(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-semibold text-slate-800 bg-[#FAF8F5] hover:bg-slate-200/70 border border-slate-300 rounded-md transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 h-10 px-4 text-xs sm:text-sm font-semibold text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 rounded-md transition-colors cursor-pointer shadow-xs"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>{lang === 'mr' ? 'प्रिंट आवृत्ती' : 'Printable View'}</span>
@@ -758,7 +758,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 setDraftProfile(profile);
                 setIsEditingProfile(!isEditingProfile);
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold text-slate-800 bg-[#FAF8F5] hover:bg-slate-200/70 border border-slate-300 rounded-md transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 h-10 px-4 text-xs sm:text-sm font-semibold text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 rounded-md transition-colors cursor-pointer shadow-xs"
             >
               <Edit3 className="w-3.5 h-3.5" />
               <span>

@@ -6,6 +6,7 @@ import {
   WifiOff,
   ShieldCheck,
   X,
+  PhoneCall,
 } from 'lucide-react';
 
 interface ExecutiveTopBarProps {
@@ -25,10 +26,9 @@ export const ExecutiveTopBar: React.FC<ExecutiveTopBarProps> = ({
 }) => {
   const [showOfflineBanner, setShowOfflineBanner] = useState(true);
 
-  const workflowSteps = [
+  const navigationSections = [
     {
       tab: 'home' as NavTab,
-      stepNum: 1,
       label: { en: 'Seva Desk', mr: 'सेवा डेस्क', hi: 'सेवा डेस्क' },
       hint: {
         en: 'Rural Maharashtra companion overview & profile selection',
@@ -38,8 +38,7 @@ export const ExecutiveTopBar: React.FC<ExecutiveTopBarProps> = ({
     },
     {
       tab: 'schemes' as NavTab,
-      stepNum: 2,
-      label: { en: 'Scheme Finder', mr: 'योजना शोधक', hi: 'योजना खोजक' },
+      label: { en: 'Schemes & Subsidies', mr: 'शासकीय योजना', hi: 'सरकारी योजनाएं' },
       hint: {
         en: 'Subsidies up to 35% with verified Maharashtra GR rules',
         mr: '३५% अनुदानासह अधिकृत शासन निर्णय व पात्रता',
@@ -48,7 +47,6 @@ export const ExecutiveTopBar: React.FC<ExecutiveTopBarProps> = ({
     },
     {
       tab: 'tools' as NavTab,
-      stepNum: 3,
       label: { en: 'Digital Tools', mr: 'डिजिटल साधने', hi: 'डिजिटल टूल्स' },
       hint: {
         en: 'UPI QR, WhatsApp Catalog, Google Maps & Billing tools',
@@ -58,8 +56,7 @@ export const ExecutiveTopBar: React.FC<ExecutiveTopBarProps> = ({
     },
     {
       tab: 'readiness' as NavTab,
-      stepNum: 4,
-      label: { en: 'Readiness Test', mr: 'सज्जता चाचणी', hi: 'तत्परता जांच' },
+      label: { en: 'Readiness Audit', mr: 'सज्जता चाचणी', hi: 'तत्परता जांच' },
       hint: {
         en: '8-question business readiness score & gap analysis',
         mr: '८ सोप्या प्रश्नांची व्यवसाय सज्जता व स्कोअर चाचणी',
@@ -68,8 +65,7 @@ export const ExecutiveTopBar: React.FC<ExecutiveTopBarProps> = ({
     },
     {
       tab: 'dashboard' as NavTab,
-      stepNum: 5,
-      label: { en: 'Action Plan & PDF', mr: 'कृती केंद्र व PDF', hi: 'एक्शन सेंटर व PDF' },
+      label: { en: 'Action Plan & PDF', mr: 'कृती आराखडा', hi: 'एक्शन प्लान' },
       hint: {
         en: 'Official downloadable document checklist & readiness report PDF',
         mr: 'कागदपत्रे व स्कोअरचा अधिकृत छापील PDF अहवाल',
@@ -78,8 +74,7 @@ export const ExecutiveTopBar: React.FC<ExecutiveTopBarProps> = ({
     },
     {
       tab: 'directory' as NavTab,
-      stepNum: 6,
-      label: { en: 'DIC Directory', mr: 'मदत केंद्रे', hi: 'सहायता केंद्र' },
+      label: { en: 'District Centres', mr: 'जिल्हा कार्यालये', hi: 'जिला कार्यालय' },
       hint: {
         en: 'District Industries Centres & MahaSeva kendras across all 36 districts',
         mr: 'महाराष्ट्रातील सर्व ३६ जिल्हा उद्योग केंद्र व मदत केंद्रे',
@@ -89,106 +84,122 @@ export const ExecutiveTopBar: React.FC<ExecutiveTopBarProps> = ({
   ];
 
   return (
-    <div className="relative z-30 select-none bg-[#F5F2EB] border-b border-[#E2DDD5]">
-      {/* Refined Saffron Hairline Accent Line matching Maharashtra state emblem */}
+    <div className="relative z-30 select-none bg-[#F7F5F0] border-b border-[#E2DDD5]">
+      {/* Saffron Hairline Accent Line matching Maharashtra state emblem */}
       <div className="h-[2px] w-full bg-[#C25E00]" />
 
-      {/* Main Top Workflow Ribbon - Designed to match the warm linen canvas */}
+      {/* Main Top Institutional Utility Ribbon */}
       <aside
-        aria-label="Maharashtra MSME Citizen Workflow"
-        className="px-3 sm:px-6 py-2"
+        aria-label="Government of Maharashtra MSME Utility Header"
+        className="px-4 sm:px-8 py-2"
       >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2.5 sm:gap-4 text-xs">
           
-          {/* Left: Official Initiative Identification */}
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="font-semibold tracking-wider text-stone-900 text-[11px] uppercase">
-              {t(
-                {
-                  en: 'Maharashtra MSME Portal',
-                  mr: 'महाराष्ट्र एमएसएमई साथी',
-                  hi: 'महाराष्ट्र एमएसएमई सारथी',
-                },
-                language
-              )}
-            </span>
-            <span className="text-stone-300 font-light" aria-hidden="true">|</span>
-            <span className="text-[11px] text-stone-600 hidden sm:inline">
-              {t(
-                {
-                  en: 'Citizen Enterprise Guidance',
-                  mr: 'नागरी व्यवसाय मार्गदर्शिका',
-                  hi: 'नागरिक व्यवसाय मार्गदर्शिका',
-                },
-                language
-              )}
-            </span>
+          {/* Left: Official Maharashtra State Administration Identification */}
+          <div className="flex items-center gap-2.5 shrink-0">
+            {/* Maharashtra State Seal Accent Badge */}
+            <div className="flex items-center gap-1.5 font-medium text-stone-900">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C25E00]" aria-hidden="true" />
+              <span className="font-semibold text-stone-900 tracking-tight text-[11px] sm:text-xs">
+                {t(
+                  {
+                    en: 'Government of Maharashtra',
+                    mr: 'महाराष्ट्र शासन',
+                    hi: 'महाराष्ट्र शासन',
+                  },
+                  language
+                )}
+              </span>
+              <span className="text-stone-300 font-light" aria-hidden="true">·</span>
+              <span className="text-[11px] sm:text-xs text-stone-600 hidden sm:inline">
+                {t(
+                  {
+                    en: 'Directorate of Industries',
+                    mr: 'उद्योग संचालनालय',
+                    hi: 'उद्योग निदेशालय',
+                  },
+                  language
+                )}
+              </span>
+            </div>
           </div>
 
-          {/* Center: Clean Segmented Stepper matching light palette */}
-          <div className="flex items-center gap-0.5 overflow-x-auto no-scrollbar w-full md:w-auto p-1 bg-[#E8E2D6] rounded-lg border border-[#DDD5C7]">
-            {workflowSteps.map((step) => {
-              const isActive = activeTab === step.tab;
+          {/* Center: Clean Executive Section Breadcrumb (No emojis, no number circles, premium flat style) */}
+          <nav
+            aria-label="Portal Sections"
+            className="flex items-center gap-1 overflow-x-auto no-scrollbar w-full md:w-auto py-0.5"
+          >
+            {navigationSections.map((sec) => {
+              const isActive = activeTab === sec.tab;
 
               return (
                 <button
-                  key={step.tab}
+                  key={sec.tab}
                   type="button"
-                  onClick={() => onNavigateTab(step.tab)}
-                  className={`px-3 py-1 text-xs rounded-md whitespace-nowrap transition-all duration-150 flex items-center gap-1.5 cursor-pointer shrink-0 font-medium ${
+                  onClick={() => onNavigateTab(sec.tab)}
+                  className={`px-2.5 py-1 text-[11px] sm:text-xs rounded font-medium whitespace-nowrap transition-colors cursor-pointer shrink-0 ${
                     isActive
-                      ? 'bg-white text-stone-900 font-semibold shadow-xs border border-stone-200/90'
-                      : 'text-stone-600 hover:text-stone-900 hover:bg-white/40'
+                      ? 'bg-stone-900 text-white font-semibold shadow-xs'
+                      : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
                   }`}
-                  title={t(step.hint, language)}
+                  title={t(sec.hint, language)}
                 >
-                  <span
-                    className={`w-3.5 h-3.5 rounded-full text-[10px] font-semibold flex items-center justify-center ${
-                      isActive
-                        ? 'bg-stone-900 text-white'
-                        : 'bg-stone-300/80 text-stone-700'
-                    }`}
-                  >
-                    {step.stepNum}
-                  </span>
-                  <span>{t(step.label, language)}</span>
+                  {t(sec.label, language)}
                 </button>
               );
             })}
-          </div>
+          </nav>
 
-          {/* Right: Low-Bandwidth Mode Button */}
-          <div className="flex items-center gap-2 shrink-0">
+          {/* Right: Citizen Helpline & Micro Low-Bandwidth Switch */}
+          <div className="flex items-center gap-3 shrink-0">
+            {/* Toll Free Helpline */}
+            <a
+              href="tel:18001208040"
+              className="hidden lg:inline-flex items-center gap-1.5 text-[11px] text-stone-600 hover:text-stone-900 transition-colors"
+              title="Toll-free Citizen MSME Helpline"
+            >
+              <PhoneCall className="w-3 h-3 text-[#C25E00]" />
+              <span className="font-medium">1800-120-8040</span>
+            </a>
+
+            <span className="text-stone-300 font-light hidden lg:inline" aria-hidden="true">|</span>
+
+            {/* Low-Bandwidth Mode Micro-Switch Control (Premium Executive Style) */}
             <button
               type="button"
+              role="switch"
+              aria-checked={isOfflineMode}
               onClick={() => {
                 onToggleOfflineMode();
                 if (!isOfflineMode) setShowOfflineBanner(true);
               }}
-              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium border transition-colors cursor-pointer shadow-xs ${
+              className={`inline-flex items-center gap-2 px-2.5 py-1 rounded-md text-[11px] font-medium border transition-colors cursor-pointer shadow-xs ${
                 isOfflineMode
                   ? 'bg-emerald-50 text-emerald-900 border-emerald-300'
                   : 'bg-white text-stone-700 border-stone-300 hover:bg-stone-50'
               }`}
               title={
                 isOfflineMode
-                  ? 'Offline data cached locally'
-                  : 'Enable low-data mode for rural connectivity'
+                  ? 'Offline data cached locally for low-connectivity rural zones'
+                  : 'Toggle low-bandwidth mode for rural connectivity'
               }
             >
               {isOfflineMode ? (
                 <>
-                  <WifiOff className="w-3.5 h-3.5 text-emerald-700" />
-                  <span className="font-semibold text-emerald-800">
-                    {t({ en: 'Offline Mode: Active', mr: 'ऑफलाइन: सक्रिय', hi: 'ऑफलाइन: सक्रिय' }, language)}
+                  <WifiOff className="w-3 h-3 text-emerald-700" />
+                  <span className="font-semibold text-emerald-900">
+                    {t({ en: 'Offline: Active', mr: 'ऑफलाइन: सुरू', hi: 'ऑफलाइन: सक्रिय' }, language)}
                   </span>
+                  {/* Micro toggle pill indicator */}
+                  <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block" />
                 </>
               ) : (
                 <>
-                  <Wifi className="w-3.5 h-3.5 text-stone-500" />
+                  <Wifi className="w-3 h-3 text-stone-500" />
                   <span>
                     {t({ en: 'Low-Bandwidth Mode', mr: 'कमी डेटा मोड', hi: 'कम डेटा मोड' }, language)}
                   </span>
+                  <span className="w-2 h-2 rounded-full bg-stone-300 inline-block" />
                 </>
               )}
             </button>
@@ -198,7 +209,7 @@ export const ExecutiveTopBar: React.FC<ExecutiveTopBarProps> = ({
 
       {/* Integrated Low-Bandwidth Notification Drawer (When enabled) */}
       {isOfflineMode && showOfflineBanner && (
-        <div className="bg-emerald-50 border-t border-b border-emerald-200 text-emerald-950 px-4 py-2 text-xs transition-all">
+        <div className="bg-emerald-50/90 border-t border-b border-emerald-200 text-emerald-950 px-4 sm:px-8 py-2 text-xs transition-all">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
@@ -206,18 +217,18 @@ export const ExecutiveTopBar: React.FC<ExecutiveTopBarProps> = ({
                 <span className="font-semibold">
                   {t(
                     {
-                      en: 'Low-Bandwidth Offline Protection Active:',
-                      mr: 'कमी डेटा व ऑफलाइन संरक्षण सक्रिय:',
-                      hi: 'कम डेटा व ऑफलाइन सुरक्षा सक्रिय:',
+                      en: 'Low-Bandwidth Mode Active:',
+                      mr: 'कमी डेटा व ऑफलाइन मोड सक्रिय:',
+                      hi: 'कम डेटा व ऑफलाइन मोड सक्रिय:',
                     },
                     language
                   )}{' '}
                 </span>
                 {t(
                   {
-                    en: 'Schemes, document checklists, and 36-district helpdesk contacts are cached for offline access.',
-                    mr: 'शासकीय योजना, कागदपत्रे आणि ३६ जिल्ह्यांचे संपर्क फोनमध्ये सेव्ह आहेत.',
-                    hi: 'सरकारी योजनाएं, दस्तावेज और 36 जिलों के संपर्क फोन में सुरक्षित हैं।',
+                    en: 'All government schemes, checklists, and 36-district helpdesk contacts are cached on your device for uninterrupted offline access.',
+                    mr: 'शासकीय योजना, कागदपत्रे आणि ३६ जिल्ह्यांचे संपर्क ऑफलाइन उपलब्धतेसाठी फोनमध्ये सेव्ह आहेत.',
+                    hi: 'सरकारी योजनाएं, दस्तावेज और 36 जिलों के संपर्क ऑफलाइन उपयोग के लिए फोन में सुरक्षित हैं।',
                   },
                   language
                 )}

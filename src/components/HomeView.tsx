@@ -16,7 +16,6 @@ import { SCHEMES_DATA } from '../data/schemesData';
 import { DEMO_PROFILES, MAHARASHTRA_DISTRICTS } from '../data/districtsAndResourcesData';
 import {
   ArrowRight,
-  Sparkles,
   FileText,
   Wrench,
   BookOpen,
@@ -106,26 +105,24 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <button
                   onClick={() => onNavigate('schemes')}
-                  className="px-6 py-3.5 bg-stone-900 hover:bg-stone-800 text-white font-medium rounded-xl text-sm transition-all shadow-sm flex items-center gap-2 cursor-pointer"
+                  className="h-11 px-6 bg-[#0F172A] hover:bg-slate-800 active:bg-black text-white font-semibold rounded-md text-sm shadow-xs border border-slate-900 transition-colors cursor-pointer inline-flex items-center justify-center"
                 >
                   <span>{t(UI_LABELS.findSchemes, language)}</span>
-                  <ArrowRight className="w-4 h-4" />
                 </button>
 
                 <button
                   onClick={() => onNavigate('tools')}
-                  className="px-5 py-3.5 bg-white hover:bg-stone-50 text-stone-900 border border-stone-300 font-medium rounded-xl text-sm transition-all shadow-xs flex items-center gap-2 cursor-pointer"
+                  className="h-11 px-5 bg-white hover:bg-stone-50 active:bg-stone-100 text-stone-800 border border-stone-300 font-semibold rounded-md text-sm shadow-xs transition-colors cursor-pointer inline-flex items-center justify-center"
                 >
-                  <Wrench className="w-4 h-4 text-amber-700" />
                   <span>{t(UI_LABELS.exploreTools, language)}</span>
                 </button>
 
                 <button
                   onClick={onOpenVoice}
-                  className="px-4 py-3.5 bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-300 font-medium rounded-xl text-sm transition-all flex items-center gap-2 cursor-pointer"
+                  className="h-11 px-5 bg-[#C25E00] hover:bg-[#9A3412] active:bg-[#7C2D12] text-white font-semibold rounded-md text-sm shadow-xs border border-[#B45309] transition-colors cursor-pointer inline-flex items-center justify-center gap-2"
                 >
-                  <Mic className="w-4 h-4 text-amber-800" />
-                  <span className="font-semibold">{t({ en: 'Ask in Marathi / Hindi', mr: 'मराठी / हिंदी मध्ये बोला', hi: 'मराठी / हिंदी में बोलें' }, language)}</span>
+                  <Mic className="w-4 h-4" />
+                  <span>{t({ en: 'Voice Assistant (Marathi / Hindi)', mr: 'सारथी व्हॉइस (मराठी / हिंदी)', hi: 'सारथी वॉइस (मराठी / हिंदी)' }, language)}</span>
                 </button>
               </div>
 
@@ -239,7 +236,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                       onSelectNeed(selectedN);
                       onNavigate('schemes');
                     }}
-                    className="w-full py-3 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-sm transition-colors flex items-center justify-center gap-2 mt-4 cursor-pointer"
+                    className="w-full h-11 bg-[#0F172A] hover:bg-slate-800 active:bg-black text-white font-semibold rounded-md text-sm border border-slate-900 shadow-xs transition-colors flex items-center justify-center gap-2 mt-4 cursor-pointer"
                   >
                     <span>{t({ en: 'See Full Checklist & Subsidy Details', mr: 'संपूर्ण कागदपत्रे व अनुदानाचे तपशील पहा', hi: 'दस्तावेज व सब्सिडी का पूरा विवरण देखें' }, language)}</span>
                     <ArrowRight className="w-4 h-4" />
@@ -412,7 +409,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={() => onNavigate('learn')}
-                className="px-5 py-3 bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold rounded-xl text-sm transition-colors flex items-center gap-2 cursor-pointer"
+                className="h-10 px-5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-semibold rounded-md text-sm shadow-xs transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <span>{t({ en: 'Start Practical Lessons', mr: 'प्रात्यक्षिक धडे सुरू करा', hi: 'व्यावहारिक सबक शुरू करें' }, language)}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -420,10 +417,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               <button
                 onClick={() => onNavigate('readiness')}
-                className="px-5 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-medium rounded-xl text-sm transition-colors flex items-center gap-2 cursor-pointer"
+                className="h-10 px-5 bg-white/10 hover:bg-white/20 text-white border border-white/25 font-semibold rounded-md text-sm shadow-xs transition-colors flex items-center gap-2 cursor-pointer"
               >
-                <Award className="w-4 h-4 text-amber-400" />
-                <span>{t({ en: 'Check My Readiness Score', mr: 'माझा डिजिटल स्कोअर तपासा', hi: 'मेरा डिजिटल स्कोर जांचें' }, language)}</span>
+                <span>{t({ en: 'Check Readiness Score', mr: 'सज्जता स्कोअर तपासा', hi: 'तत्परता स्कोर जांचें' }, language)}</span>
               </button>
             </div>
           </div>
@@ -495,10 +491,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
           <button
             onClick={() => onNavigate('dashboard')}
-            className="shrink-0 px-6 py-3.5 bg-stone-900 hover:bg-stone-800 text-white font-bold rounded-xl text-sm transition-all shadow-md flex items-center gap-2 cursor-pointer"
+            className="shrink-0 h-11 px-6 bg-[#0F172A] hover:bg-slate-800 active:bg-black text-white font-semibold rounded-md text-sm shadow-xs border border-slate-900 transition-colors flex items-center gap-2 cursor-pointer"
           >
             <Printer className="w-4 h-4 text-amber-400" />
-            <span>{t({ en: 'Go to Action Centre & Print PDF', mr: 'ॲक्शन सेंटरमध्ये जा व PDF घ्या', hi: 'एक्शन सेंटर जाएं व PDF प्राप्त करें' }, language)}</span>
+            <span>{t({ en: 'Go to Action Centre & Print PDF', mr: 'कृती केंद्रात जा व PDF घ्या', hi: 'एक्शन सेंटर जाएं व PDF लें' }, language)}</span>
           </button>
         </div>
       </section>
