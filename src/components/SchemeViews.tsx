@@ -918,7 +918,11 @@ export const SchemeViews: React.FC<SchemeFinderProps> = ({
                           : 'Documents required: '}
                       </span>
                       {scheme.documentsRequired
-                        .map((dId) => t(DOCUMENTS_MASTER[dId].title, lang).split(' (')[0])
+                        .map((dId) => {
+                          const doc = DOCUMENTS_MASTER[dId];
+                          return doc ? t(doc.title, lang).split(' (')[0] : dId;
+                        })
+                        .filter(Boolean)
                         .join(' · ')}
                     </div>
                   </div>

@@ -67,6 +67,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
       s.needs.includes(selectedN)
   );
 
+  const displaySchemes = matchingSchemes.length > 0
+    ? matchingSchemes
+    : SCHEMES_DATA.filter((s) => s.categories.includes(selectedCat) || s.needs.includes(selectedN));
+
   return (
     <div className="space-y-16 pb-16">
       {/* Hero Section */}
@@ -149,7 +153,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     </span>
                   </div>
                   <span className="px-2 py-0.5 bg-emerald-100 text-emerald-900 text-xs font-mono font-semibold rounded">
-                    {matchingSchemes.length} {t({ en: 'Schemes Found', mr: 'योजना उपलब्ध', hi: 'योजनाएं उपलब्ध' }, language)}
+                    {displaySchemes.length} {t({ en: 'Schemes Found', mr: 'योजना उपलब्ध', hi: 'योजनाएं उपलब्ध' }, language)}
                   </span>
                 </div>
 
@@ -209,16 +213,16 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   </div>
 
                   {/* Top Matching Scheme Preview */}
-                  {matchingSchemes.length > 0 && (
+                  {displaySchemes.length > 0 && (
                     <div className="p-3.5 bg-amber-50/80 border border-amber-200 rounded-xl mt-3">
                       <div className="text-xs font-mono font-semibold text-amber-900 uppercase tracking-wider mb-1">
                         {t({ en: 'Top Match for You:', mr: 'तुमच्यासाठी प्रमुख योजना:', hi: 'आपके लिए प्रमुख योजना:' }, language)}
                       </div>
                       <div className="font-serif font-bold text-stone-900 text-sm">
-                        {t(matchingSchemes[0].title, language)}
+                        {t(displaySchemes[0].title, language)}
                       </div>
                       <div className="text-xs text-stone-600 mt-1 line-clamp-2">
-                        {t(matchingSchemes[0].benefitSummary, language)}
+                        {t(displaySchemes[0].benefitSummary, language)}
                       </div>
                     </div>
                   )}

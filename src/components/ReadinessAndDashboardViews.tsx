@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BusinessCategory,
   BusinessNeed,
@@ -444,12 +444,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const [showPrintModal, setShowPrintModal] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
+  const safeProfile = profile && profile.id ? profile : DEMO_PROFILES[0];
+  const safeDistrict = safeProfile?.district || 'Nashik';
+  const safeName = safeProfile?.name || 'Entrepreneur';
+
+  useEffect(() => {
+    setDraftProfile(safeProfile);
+  }, [safeProfile]);
+
   const allDocKeys = Object.keys(DOCUMENTS_MASTER);
   const completedDocsCount = checkedDocs.length;
 
   const recommendedSchemes = SCHEMES_DATA.filter(
     (s) =>
-      s.categories.includes(profile.category) || s.needs.includes(profile.primaryNeed)
+      s.categories.includes(safeProfile.category) || s.needs.includes(safeProfile.primaryNeed)
   ).slice(0, 3);
 
   const handleSaveProfile = (e: React.FormEvent) => {
@@ -490,7 +498,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       doc.setTextColor(203, 213, 225);
       doc.setFontSize(8);
-      doc.text(`Date: ${today} · Ref: US-MH-${profile.district.toUpperCase()}-2026`, 15, 24);
+      doc.text(`Date: ${today} · Ref: US-MH-${(safeDistrict || 'NASHIK').toUpperCase()}-2026`, 15, 24);
 
       // Section 1: Entrepreneur Profile Overview
       let y = 38;
@@ -513,9 +521,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(15, 23, 42);
-      doc.text(profile.name, 50, y + 6);
-      doc.text(`${profile.businessName} (${profile.products || 'Rural Enterprise'})`, 50, y + 12);
-      doc.text(`${profile.district} District, Maharashtra (Stage: ${profile.stage})`, 50, y + 18);
+      doc.text(safeName, 50, y + 6);
+      doc.text(`${safeProfile.businessName || 'Rural Business'} (${safeProfile.products || 'Rural Enterprise'})`, 50, y + 12);
+      doc.text(`${safeDistrict} District, Maharashtra (Stage: ${safeProfile.stage || 'Micro Unit'})`, 50, y + 18);
 
       doc.setFont('helvetica', 'bold');
       doc.setTextColor(71, 85, 105);
@@ -524,8 +532,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(15, 23, 42);
-      doc.text(profile.category, 145, y + 6);
-      doc.text(profile.primaryNeed, 145, y + 12);
+      doc.text(safeProfile.category || 'Micro Enterprise', 145, y + 6);
+      doc.text(safeProfile.primaryNeed || 'Funding', 145, y + 12);
 
       // Section 2: Digital Readiness Score
       y += 34;
@@ -581,6 +589,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       y += 7;
       allDocKeys.forEach((docId) => {
         const item = DOCUMENTS_MASTER[docId];
+        if (!item) return;
         const isDone = checkedDocs.includes(docId);
 
         doc.setDrawColor(241, 245, 249);
@@ -599,14 +608,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(15, 23, 42);
         doc.setFontSize(8);
-        doc.text(item.title.en.substring(0, 48), 42, y + 4);
+        const titleText = item.title?.en || item.title?.mr || docId;
+        doc.text(titleText.substring(0, 50), 42, y + 4);
         doc.setTextColor(100, 116, 139);
         doc.setFontSize(7);
-        doc.text(item.title.mr.substring(0, 48), 42, y + 8);
+        const whereText = item.whereToGet?.en || item.whereToGet?.mr || 'Maha e-Seva Kendra';
+        doc.text(`Issuing Desk: ${whereText.substring(0, 48)}`, 42, y + 8);
 
         doc.setTextColor(71, 85, 105);
         doc.setFontSize(7.5);
-        doc.text(item.whereToGet.en.substring(0, 42), 125, y + 6);
+        doc.text(isDone ? 'Attested / Ready' : 'Pending Verification', 135, y + 6);
 
         y += 11;
       });
@@ -630,7 +641,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(15, 23, 42);
-      doc.text(`District Support Centre: District Industries Centre (DIC) / Maha e-Seva Kendra, ${profile.district}`, 20, y + 12);
+      doc.text(`District Support Centre: District Industries Centre (DIC) / Maha e-Seva Kendra, ${safeDistrict}`, 20, y + 12);
 
       // Footer
       doc.setFontSize(7);
@@ -638,7 +649,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       doc.text('Report issued as prototype documentation by Udyam Saarthi (Maharashtra Rural Business Companion). Verify guidelines with official DIC.', 15, 287);
 
       // Save PDF file
-      doc.save(`Udyam_Saarthi_${profile.name.replace(/\s+/g, '_')}_Assessment.pdf`);
+      doc.save(`Udyam_Saarthi_${(safeName || 'Entrepreneur').replace(/\s+/g, '_')}_Assessment.pdf`);
     } catch (err) {
       console.error('Failed to generate PDF:', err);
     } finally {
@@ -662,7 +673,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
         <div className="flex flex-wrap items-center gap-1.5">
           {DEMO_PROFILES.map((p) => {
-            const active = profile.id === p.id;
+            const active = safeProfile.id === p.id;
             return (
               <button
                 key={p.id}
@@ -690,17 +701,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <div className="space-y-1.5">
             <p className="text-xs font-mono-tabular text-slate-500">
               {lang === 'mr'
-                ? `व्यवसाय कृती केंद्र · ${profile.district}, महाराष्ट्र`
+                ? `व्यवसाय कृती केंद्र · ${safeDistrict}, महाराष्ट्र`
                 : lang === 'hi'
-                ? `व्यावसायिक कार्य केंद्र · ${profile.district}, महाराष्ट्र`
-                : `Business Action Centre · ${profile.district}, Maharashtra`}
+                ? `व्यावसायिक कार्य केंद्र · ${safeDistrict}, महाराष्ट्र`
+                : `Business Action Centre · ${safeDistrict}, Maharashtra`}
             </p>
             <h1 className="text-2xl sm:text-3xl font-semibold text-[#0F172A] font-display">
               {lang === 'mr'
-                ? `शुभ सकाळ, ${profile.name}`
+                ? `शुभ सकाळ, ${safeName}`
                 : lang === 'hi'
-                ? `सुप्रभात, ${profile.name}`
-                : `Good morning, ${profile.name}`}
+                ? `सुप्रभात, ${safeName}`
+                : `Good morning, ${safeName}`}
             </h1>
             <p className="text-sm text-slate-600">
               {lang === 'mr'
@@ -895,17 +906,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <dt className="text-xs text-slate-500">
               {lang === 'mr' ? 'व्यवसायाचे नाव' : lang === 'hi' ? 'व्यवसाय का नाम' : 'Business Name'}
             </dt>
-            <dd className="font-semibold text-[#0F172A] mt-0.5">{profile.businessName}</dd>
-            <dd className="text-xs text-slate-600 mt-0.5">{profile.products}</dd>
+            <dd className="font-semibold text-[#0F172A] mt-0.5">{safeProfile.businessName || 'Rural Enterprise'}</dd>
+            <dd className="text-xs text-slate-600 mt-0.5">{safeProfile.products || 'Local Products'}</dd>
           </div>
 
           <div className="p-3.5 bg-[#FAF8F5] border border-slate-200 rounded">
             <dt className="text-xs text-slate-500">
               {lang === 'mr' ? 'श्रेणी आणि टप्पा' : lang === 'hi' ? 'श्रेणी और चरण' : 'Category & Stage'}
             </dt>
-            <dd className="font-semibold text-[#0F172A] mt-0.5">{profile.category}</dd>
+            <dd className="font-semibold text-[#0F172A] mt-0.5">{safeProfile.category || 'Micro Enterprise'}</dd>
             <dd className="text-xs text-slate-600 mt-0.5">
-              {profile.stage} · {profile.district}
+              {safeProfile.stage || 'Unit'} · {safeDistrict}
             </dd>
           </div>
 
@@ -1083,6 +1094,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <div className="space-y-2">
               {allDocKeys.map((docId) => {
                 const doc = DOCUMENTS_MASTER[docId];
+                if (!doc) return null;
                 const isDone = checkedDocs.includes(docId);
                 return (
                   <label
@@ -1096,7 +1108,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       className="mt-1 w-4 h-4 accent-[#0F172A] rounded cursor-pointer"
                     />
                     <span className={isDone ? 'line-through text-slate-400' : 'text-slate-800'}>
-                      {t(doc.title, lang)}
+                      {t(doc.title, lang) || docId}
                     </span>
                   </label>
                 );
@@ -1251,8 +1263,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </div>
                 <div className="text-right text-xs font-mono-tabular text-slate-600">
                   <p><strong>Date:</strong> {new Date().toLocaleDateString('en-GB')}</p>
-                  <p><strong>District:</strong> {profile.district}, MH</p>
-                  <p><strong>Report Ref:</strong> US-MH-{profile.district.toUpperCase()}-2026</p>
+                  <p><strong>District:</strong> {safeDistrict}, MH</p>
+                  <p><strong>Report Ref:</strong> US-MH-{(safeDistrict || 'NASHIK').toUpperCase()}-2026</p>
                 </div>
               </div>
 
@@ -1260,13 +1272,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <div className="bg-[#FAF8F5] border border-slate-300 rounded p-4 grid grid-cols-2 gap-4 text-xs">
                 <div>
                   <p className="text-slate-500 uppercase tracking-wider text-[10px]">Entrepreneur & Business</p>
-                  <p className="text-sm font-bold text-[#0F172A] mt-0.5">{profile.name}</p>
-                  <p className="text-slate-700">{profile.businessName} ({profile.products || 'Rural Enterprise'})</p>
+                  <p className="text-sm font-bold text-[#0F172A] mt-0.5">{safeName}</p>
+                  <p className="text-slate-700">{safeProfile.businessName || 'Rural Business'} ({safeProfile.products || 'Rural Enterprise'})</p>
                 </div>
                 <div>
                   <p className="text-slate-500 uppercase tracking-wider text-[10px]">Classification & Need</p>
-                  <p className="font-semibold text-[#0F172A] mt-0.5">{profile.category} · {profile.stage}</p>
-                  <p className="text-slate-700">Primary Need: <strong>{profile.primaryNeed}</strong></p>
+                  <p className="font-semibold text-[#0F172A] mt-0.5">{safeProfile.category || 'Micro Enterprise'} · {safeProfile.stage || 'Unit'}</p>
+                  <p className="text-slate-700">Primary Need: <strong>{safeProfile.primaryNeed || 'Funding'}</strong></p>
                 </div>
               </div>
 
@@ -1308,6 +1320,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <tbody className="divide-y divide-slate-200">
                     {allDocKeys.map((docId) => {
                       const doc = DOCUMENTS_MASTER[docId];
+                      if (!doc) return null;
                       const isDone = checkedDocs.includes(docId);
                       return (
                         <tr key={docId} className={isDone ? 'bg-emerald-50/20' : 'bg-white'}>
@@ -1319,11 +1332,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                             )}
                           </td>
                           <td className="p-2 border-r border-slate-200">
-                            <p className="font-semibold text-slate-900">{doc.title.en}</p>
-                            <p className="text-slate-500 text-[11px]">{doc.title.mr}</p>
+                            <p className="font-semibold text-slate-900">{doc.title?.en || docId}</p>
+                            <p className="text-slate-500 text-[11px]">{doc.title?.mr || doc.title?.en || ''}</p>
                           </td>
                           <td className="p-2 text-slate-600">
-                            {doc.whereToGet.en}
+                            {doc.whereToGet?.en || doc.whereToGet?.mr || ''}
                           </td>
                         </tr>
                       );
@@ -1338,7 +1351,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   Recommended Next Step: Create WhatsApp Business Product Catalogue
                 </p>
                 <p className="text-slate-700">
-                  Contact the District Industries Centre (DIC) or Taluka Agriculture Office in {profile.district} for scheme DPR and submission guidance.
+                  Contact the District Industries Centre (DIC) or Taluka Agriculture Office in {safeDistrict} for scheme DPR and submission guidance.
                 </p>
               </div>
 

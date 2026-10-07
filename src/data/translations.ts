@@ -1,7 +1,16 @@
 import { Language, LocalizedText } from '../types';
 
-export const t = (item: LocalizedText, lang: Language): string => {
-  return item[lang] || item.en;
+export const t = (item?: LocalizedText | string | null, lang: Language = 'en'): string => {
+  if (!item) return '';
+  if (typeof item === 'string') return item;
+  if (typeof item !== 'object') return String(item);
+  try {
+    const val = (item as any)[lang];
+    if (typeof val === 'string' && val.trim().length > 0) return val;
+    return item.en || item.mr || item.hi || '';
+  } catch {
+    return '';
+  }
 };
 
 export const UI_LABELS: Record<string, LocalizedText> = {
@@ -50,20 +59,40 @@ export const UI_LABELS: Record<string, LocalizedText> = {
     mr: 'सारथीला विचारा',
     hi: 'सारथी से पूछें',
   },
+  heroTitle: {
+    en: 'Government schemes and digital tools, explained for your business.',
+    mr: 'तुमच्या व्यवसायासाठी शासकीय योजना आणि डिजिटल साधने, सोप्या भाषेत.',
+    hi: 'आपके व्यवसाय के लिए सरकारी योजनाएं और डिजिटल टूल्स, सरल भाषा में।',
+  },
   heroHeading: {
     en: 'Government schemes and digital tools, explained for your business.',
     mr: 'तुमच्या व्यवसायासाठी शासकीय योजना आणि डिजिटल साधने, सोप्या भाषेत.',
     hi: 'आपके व्यवसाय के लिए सरकारी योजनाएं और डिजिटल टूल्स, सरल भाषा में।',
+  },
+  heroSubtitle: {
+    en: 'Discover the support you may be eligible for, understand what it means, and learn how digital tools can help your rural business grow.',
+    mr: 'तुम्ही कोणत्या मदतीसाठी पात्र आहात ते शोधा, त्याचा सोपा अर्थ समजून घ्या आणि डिजिटल साधनांनी तुमचा ग्रामीण व्यवसाय कसा वाढवायचा ते शिका.',
+    hi: 'जानें कि आप किस सहायता के पात्र हैं, इसका सरल अर्थ समझें, और सीखें कि डिजिटल टूल्स आपके ग्रामीण व्यवसाय को कैसे आगे बढ़ा सकते हैं।',
   },
   heroSubheading: {
     en: 'Discover the support you may be eligible for, understand what it means, and learn how digital tools can help your rural business grow.',
     mr: 'तुम्ही कोणत्या मदतीसाठी पात्र आहात ते शोधा, त्याचा सोपा अर्थ समजून घ्या आणि डिजिटल साधनांनी तुमचा ग्रामीण व्यवसाय कसा वाढवायचा ते शिका.',
     hi: 'जानें कि आप किस सहायता के पात्र हैं, इसका सरल अर्थ समझें, और सीखें कि डिजिटल टूल्स आपके ग्रामीण व्यवसाय को कैसे आगे बढ़ा सकते हैं।',
   },
+  findSchemes: {
+    en: 'Find My Schemes',
+    mr: 'माझ्यासाठी योजना शोधा',
+    hi: 'मेरे लिए योजनाएं खोजें',
+  },
   ctaFindSchemes: {
     en: 'Find My Schemes',
     mr: 'माझ्यासाठी योजना शोधा',
     hi: 'मेरे लिए योजनाएं खोजें',
+  },
+  exploreTools: {
+    en: 'Explore Digital Tools',
+    mr: 'डिजिटल साधने पहा',
+    hi: 'डिजिटल टूल्स देखें',
   },
   ctaExploreTools: {
     en: 'Explore Digital Tools',

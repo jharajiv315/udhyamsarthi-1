@@ -38,3 +38,12 @@
   background-size: 20px 20px;
 }
 
+/* Hide scrollbar for clean horizontal steppers while preserving scrollability */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
